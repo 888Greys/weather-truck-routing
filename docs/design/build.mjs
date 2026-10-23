@@ -209,7 +209,46 @@ const ranking = figure(
   },
 );
 
-const all = { "fig-1": pipeline, "fig-2": eta, "fig-3": record, "fig-4": decision, "fig-5": ranking };
+const io = figure(
+  "fig-io",
+  {
+    height: 448,
+    title: "inputs and outputs, stage by stage",
+    desc: "Each row pairs what goes into a stage with what comes out: the request body, OsrmRouter.plan returning three routes, sampling and ETA producing checkpoints, the weather lookup, risk.assess producing a level and driver, and the ranking producing metrics and a recommendation.",
+  },
+  (f) => {
+    f.kicker(20, 34, "in · request body");
+    f.kicker(195, 34, "stage · routing/services");
+    f.kicker(440, 34, "out · response field");
+    f.rule(185, 44, 185, 412, { dash: "dashed" });
+    f.rule(430, 44, 430, 412, { dash: "dashed" });
+
+    const rows = [
+      ["origin, destination", "OsrmRouter.plan()", "alternatives, then via points", "routes[]", "geometry, 900 points max"],
+      ["sample_interval_miles", "sample_along_route()", "places stops, computes ETA", "checkpoints[]", "13 on this route"],
+      ["(lat, lon, eta)", "OpenMeteoWeather", "one call per 20 coordinates", "wind, rain, snow", "per checkpoint hour"],
+      ["weight_lb", "risk.assess()", "worst of three, then load", "level + driver", "0 Low to 4 No Travel"],
+      ["level + segment miles", "aggregate, ranking_key()", "rolls miles up, orders", "metrics, recommendation", "severe mi, high mi, rank"],
+      ["depart_at + horizon", "build_plan()", "assembles one response", "heatmap, legend, meta", "49 hours per cell"],
+    ];
+    rows.forEach(([input, stage, note, output, outNote], i) => {
+      const y = 52 + i * 60;
+      f.rect({ x: 20, y, w: 400, h: 46, hue: "paper" });
+      f.text(30, y + 19, input, { size: 11, max: 145 });
+      f.text(205, y + 19, stage, { size: 12, weight: 700, max: 200 });
+      f.text(205, y + 34, note, { size: 11, serif: true, hue: "ink-soft", max: 205 });
+      f.text(440, y + 19, output, { size: 11.5, weight: 700 });
+      f.text(440, y + 34, outNote, { size: 11, serif: true, hue: "ink-soft", max: 178 });
+    });
+    f.text(20, 436, "one request in, one plan out · the browser never sees a raw provider payload.", {
+      size: 11,
+      serif: true,
+      hue: "ink-mute",
+    });
+  },
+);
+
+const all = { "fig-1": pipeline, "fig-2": eta, "fig-3": record, "fig-4": decision, "fig-5": ranking, "fig-6": io };
 Object.entries(all).forEach(([name, svg]) => {
   writeFileSync(join(FIG_DIR, name + ".svg"), svg);
   console.log("wrote figures/" + name + ".svg", Buffer.byteLength(svg) + " bytes");

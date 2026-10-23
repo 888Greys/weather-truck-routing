@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 448" role="img" aria-labelledby="fig-io-title fig-io-desc" font-family="JetBrains Mono, ui-monospace, monospace" fill="var(--m-ink, #1a1a1a)">
+  <title id="fig-io-title">inputs and outputs, stage by stage</title>
+  <desc id="fig-io-desc">Each row pairs what goes into a stage with what comes out: the request body, OsrmRouter.plan returning three routes, sampling and ETA producing checkpoints, the weather lookup, risk.assess producing a level and driver, and the ranking producing metrics and a recommendation.</desc>
+  <text x="20" y="34" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">IN · REQUEST BODY</text>
+  <text x="195" y="34" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">STAGE · ROUTING/SERVICES</text>
+  <text x="440" y="34" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">OUT · RESPONSE FIELD</text>
+  <line x1="185" y1="44" x2="185" y2="412" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1" stroke-dasharray="5 4"/>
+  <line x1="430" y1="44" x2="430" y2="412" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1" stroke-dasharray="5 4"/>
+  <rect x="20" y="52" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="71" font-size="11">origin, destination</text>
+  <text x="205" y="71" font-size="12" font-weight="700">OsrmRouter.plan()</text>
+  <text x="205" y="86" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">alternatives, then via points</text>
+  <text x="440" y="71" font-size="11.5" font-weight="700">routes[]</text>
+  <text x="440" y="86" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">geometry, 900 points max</text>
+  <rect x="20" y="112" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="131" font-size="11">sample_interval_miles</text>
+  <text x="205" y="131" font-size="12" font-weight="700">sample_along_route()</text>
+  <text x="205" y="146" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">places stops, computes ETA</text>
+  <text x="440" y="131" font-size="11.5" font-weight="700">checkpoints[]</text>
+  <text x="440" y="146" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">13 on this route</text>
+  <rect x="20" y="172" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="191" font-size="11">(lat, lon, eta)</text>
+  <text x="205" y="191" font-size="12" font-weight="700">OpenMeteoWeather</text>
+  <text x="205" y="206" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">one call per 20 coordinates</text>
+  <text x="440" y="191" font-size="11.5" font-weight="700">wind, rain, snow</text>
+  <text x="440" y="206" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">per checkpoint hour</text>
+  <rect x="20" y="232" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="251" font-size="11">weight_lb</text>
+  <text x="205" y="251" font-size="12" font-weight="700">risk.assess()</text>
+  <text x="205" y="266" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">worst of three, then load</text>
+  <text x="440" y="251" font-size="11.5" font-weight="700">level + driver</text>
+  <text x="440" y="266" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">0 Low to 4 No Travel</text>
+  <rect x="20" y="292" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="311" font-size="11">level + segment miles</text>
+  <text x="205" y="311" font-size="12" font-weight="700">aggregate, ranking_key()</text>
+  <text x="205" y="326" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">rolls miles up, orders</text>
+  <text x="440" y="311" font-size="11.5" font-weight="700">metrics, recommendation</text>
+  <text x="440" y="326" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">severe mi, high mi, rank</text>
+  <rect x="20" y="352" width="400" height="46" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="30" y="371" font-size="11">depart_at + horizon</text>
+  <text x="205" y="371" font-size="12" font-weight="700">build_plan()</text>
+  <text x="205" y="386" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">assembles one response</text>
+  <text x="440" y="371" font-size="11.5" font-weight="700">heatmap, legend, meta</text>
+  <text x="440" y="386" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">49 hours per cell</text>
+  <text x="20" y="436" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-mute, #6f6f6a)">one request in, one plan out · the browser never sees a raw provider payload.</text>
+</svg>
