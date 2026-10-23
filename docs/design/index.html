@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Weather-Aware Truck Routing · design dossier</title>
+<style>
+  :root {
+    --paper: #fafaf5; --panel: #f3f1e8; --edge: #e4e1d4;
+    --ink: #1a1a1a; --soft: #4a4a4a; --mute: #6f6f6a;
+    --blue: #2f5d9a; --violet: #5b4fa3; --green: #336b40; --teal: #18696a;
+    --amber: #85590c; --rose: #b0344d; --grey: #5e5e59; --olive: #515f26; --indigo: #4b4f9e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+    font-size: 16px; line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono, .eyebrow, h2, .fig-num, .src, .tag, .t {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  main { max-width: 940px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  header.title { border-bottom: 1px solid var(--edge); padding-bottom: 26px; margin-bottom: 30px; }
+  .eyebrow { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--mute); }
+  h1 { font-size: 34px; line-height: 1.15; margin: 10px 0 8px; letter-spacing: -0.015em; }
+  header p { margin: 0; color: var(--soft); max-width: 64ch; }
+
+  .idea {
+    display: grid; grid-template-columns: 132px 1fr; gap: 22px;
+    border: 1px solid var(--edge); background: var(--panel);
+    padding: 20px 22px; margin: 30px 0 40px;
+  }
+  .idea .tag { font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--blue); padding-top: 4px; }
+  .idea p { margin: 0; }
+
+  h2 { font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mute); margin: 0 0 16px; font-weight: 600; }
+
+  .key { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 30px; margin-bottom: 46px; }
+  .key div { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--soft); }
+  .sw { width: 12px; height: 12px; border: 1px solid; flex: none; }
+
+  figure { margin: 0 0 56px; break-inside: avoid; }
+  .fig-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .fig-num { font-size: 11px; color: var(--mute); border: 1px solid var(--edge); padding: 1px 7px; }
+  .fig-claim { font-weight: 700; font-size: 17px; line-height: 1.4; }
+  .fig-body { border: 1px solid var(--edge); background: #fff; padding: 18px; }
+  .fig-body img { width: 100%; height: auto; display: block; }
+  figcaption { display: flex; gap: 14px; flex-wrap: wrap; justify-content: space-between; margin-top: 10px; font-size: 13.5px; color: var(--soft); }
+  .src { font-size: 11px; color: var(--mute); }
+
+  .plan { border-top: 1px solid var(--edge); padding-top: 30px; margin-top: 6px; }
+  .plan ol { margin: 0; padding-left: 22px; }
+  .plan li { margin-bottom: 14px; }
+  .plan .t { font-size: 11px; color: var(--mute); margin-right: 8px; }
+
+  footer { border-top: 1px solid var(--edge); margin-top: 46px; padding-top: 18px; color: var(--mute); font-size: 12px; }
+
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    main { max-width: none; padding: 0; }
+    figure, .idea { page-break-inside: avoid; }
+    .plan { page-break-before: always; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="title">
+    <div class="eyebrow">Design dossier · the shape of the thing, in five figures</div>
+    <h1>Weather-Aware Truck Routing</h1>
+    <p>The request pipeline, the ETA mechanism, what a checkpoint carries, how a level is decided,
+    and why the fastest route sometimes loses.</p>
+  </header>
+
+  <div class="idea">
+    <div class="tag">The one idea</div>
+    <p><strong>Weather is scored at arrival, not at departure.</strong> A 299 mile route crosses six hours
+    of forecast. Checkpoint 9 is not “weather now” — it is the weather at the hour the truck reaches mile 225.
+    Everything else here follows from that one substitution.</p>
+  </div>
+
+  <h2>Colour key for this set</h2>
+  <div class="key">
+    <div><span class="sw" style="border-color: var(--blue); background: var(--blue)"></span>the Django request path</div>
+    <div><span class="sw" style="border-color: var(--violet); background: var(--violet)"></span>third-party providers and their calls</div>
+    <div><span class="sw" style="border-color: var(--green); background: var(--green)"></span>the risk rules and the ordering</div>
+    <div><span class="sw" style="border-color: var(--teal); background: var(--teal)"></span>the record that leaves the API</div>
+    <div><span class="sw" style="border-color: var(--amber); background: var(--amber)"></span>time: departure, arrival, state changes</div>
+    <div><span class="sw" style="border-color: var(--rose); background: var(--rose)"></span>Severe and No Travel: the failure end</div>
+    <div><span class="sw" style="border-color: var(--grey); background: var(--grey)"></span>a neutral part, outside the rule engine</div>
+    <div><span class="sw" style="border-color: var(--olive); background: var(--olive)"></span>Moderate</div>
+  </div>
+
+  <figure>
+    <div class="fig-head"><span class="fig-num">1</span>
+      <span class="fig-claim">One HTTP request crosses six stages before the browser draws anything.</span></div>
+    <div class="fig-body"><img src="figures/fig-1.svg" alt="The six stages of the plan pipeline: PlanView.post, OsrmRouter.plan, sample_along_route, OpenMeteoWeather.fetch_many, risk.assess, ranking_key" /></div>
+    <figcaption><span>Read top to bottom; the numbered steps are the order <span class="mono">PlanView.post</span> runs them.</span>
+      <span class="src">backend/routing/services/planner.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="fig-head"><span class="fig-num">2</span>
+      <span class="fig-claim">A checkpoint is scored with the weather at the hour the truck arrives, not at departure.</span></div>
+    <div class="fig-body"><img src="figures/fig-2.svg" alt="A 299 mile route, checkpoints every 25 miles, a clock from 14:00 to 20:08, and the forecast hour each checkpoint reads" /></div>
+    <figcaption><span>Read left to right: miles become a clock time, and that clock time selects a forecast hour.</span>
+      <span class="src">planner.py · weather.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="fig-head"><span class="fig-num">3</span>
+      <span class="fig-claim">Each checkpoint carries its own evidence, so any colour on the map can be audited.</span></div>
+    <div class="fig-body"><img src="figures/fig-3.svg" alt="The eight fields of the checkpoint record: miles, eta, wind_mph, rain_in_hr, snow_in_hr, level, driver, reasons" /></div>
+    <figcaption><span>Read down the left column; the right column says why the field exists.</span>
+      <span class="src">planner.py · _checkpoint_payload</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="fig-head"><span class="fig-num">4</span>
+      <span class="fig-claim">The worst condition wins, then the load rules can only make the level worse.</span></div>
+    <div class="fig-body"><img src="figures/fig-4.svg" alt="Wind, rain and snow classify separately, the worst is taken, load escalation applies, and one of five levels comes out" /></div>
+    <figcaption><span>Read top to bottom; the double border marks the terminal No Travel level.</span>
+      <span class="src">backend/routing/services/risk.py</span></figcaption>
+  </figure>
+
+  <figure>
+    <div class="fig-head"><span class="fig-num">5</span>
+      <span class="fig-claim">Severe miles tie first, so high miles decide the recommendation, not speed.</span></div>
+    <div class="fig-body"><img src="figures/fig-5.svg" alt="Fastest versus Alternate A on severe miles, high miles, average risk and drive time" /></div>
+    <figcaption><span>Read across each row; the dashed rule separates the two routes.</span>
+      <span class="src">risk.py · ranking_key</span></figcaption>
+  </figure>
+
+  <section class="plan">
+    <h2>Rehearse in three hours</h2>
+    <ol>
+      <li><span class="t">0:00–0:50</span><strong>Say the story without the screen.</strong> Two places in,
+      three routes out, each scored at its own arrival hour, ranked by severe then high then average then time.
+      If you can say that in forty seconds without notes, the rest is detail.</li>
+      <li><span class="t">0:50–1:40</span><strong>Own the risk module.</strong> Open <span class="mono">risk.py</span>
+      and defend two choices: why the buckets are half-open, and why the load rules run after classification
+      instead of inside it. Then name one test that would fail if either changed.</li>
+      <li><span class="t">1:40–2:30</span><strong>Drive the app, not the slides.</strong> One live plan, one
+      checkpoint popup, one slider sweep, one weight change from 38,000 to 52,000 lb. Rehearse the weight change
+      until the numbers are automatic — it is the strongest thirty seconds you have.</li>
+      <li><span class="t">2:30–3:00</span><strong>Record two takes.</strong> The first is throwaway. Watch it at
+      1.5× only for pacing and filler words, then record the keeper.</li>
+    </ol>
+  </section>
+
+  <footer>Generated from the running codebase · static SVG, no scripts, prints cleanly at A4.</footer>
+</main>
+</body>
+</html>

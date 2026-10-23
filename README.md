@@ -12,6 +12,10 @@ actually be there — then recommends the safest route by the rules in the brief
 
 ---
 
+> **Design dossier:** [`docs/design/index.html`](docs/design/index.html) — five figures covering the
+> request pipeline, the ETA mechanism, the checkpoint record, the risk decision and the ranking.
+> Open it in a browser; it prints cleanly at A4.
+
 ## What it does
 
 - **Trip input** — origin and destination (geocoded autocomplete), departure date/time, load

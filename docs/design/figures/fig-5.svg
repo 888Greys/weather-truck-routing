@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 374" role="img" aria-labelledby="fig-rank-title fig-rank-desc" font-family="JetBrains Mono, ui-monospace, monospace" fill="var(--m-ink, #1a1a1a)">
+  <title id="fig-rank-title">why the fastest route loses</title>
+  <desc id="fig-rank-desc">Two routes compared on the four ranking keys. They tie on severe miles, so the second key, high miles, decides, and the slower route is recommended.</desc>
+  <text x="20" y="26" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">A · FASTEST</text>
+  <text x="336" y="26" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">B · ALTERNATE A</text>
+  <line x1="320" y1="34" x2="320" y2="348" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1" stroke-dasharray="5 4"/>
+  <rect x="20" y="40" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="32" y="57" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">severe miles</text>
+  <text x="32" y="76" font-size="13" font-weight="700">75.0 mi</text>
+  <rect x="336" y="40" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="348" y="57" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">severe miles</text>
+  <text x="348" y="76" font-size="13" font-weight="700">75.0 mi</text>
+  <rect x="20" y="102" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="32" y="119" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">high miles</text>
+  <text x="32" y="138" font-size="13" font-weight="700">25.0 mi</text>
+  <rect x="336" y="102" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="348" y="119" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">high miles</text>
+  <text x="348" y="138" font-size="13" font-weight="700">0.0 mi</text>
+  <rect x="20" y="164" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="32" y="181" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">avg risk</text>
+  <text x="32" y="200" font-size="13" font-weight="700">1.17</text>
+  <rect x="336" y="164" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="348" y="181" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">avg risk</text>
+  <text x="348" y="200" font-size="13" font-weight="700">0.91</text>
+  <rect x="20" y="226" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="32" y="243" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">drive time</text>
+  <text x="32" y="262" font-size="13" font-weight="700">6 h 08 m</text>
+  <rect x="336" y="226" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="348" y="243" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">drive time</text>
+  <text x="348" y="262" font-size="13" font-weight="700">8 h 28 m</text>
+  <rect x="20" y="288" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="32" y="305" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">rank</text>
+  <text x="32" y="324" font-size="13" font-weight="700">#3 of 3</text>
+  <rect x="336" y="288" width="284" height="44" fill="var(--m-paper, #fafaf5)" stroke="var(--m-paper, #fafaf5)"/>
+  <text x="348" y="305" font-size="11" fill="var(--m-ink-mute, #6f6f6a)">rank</text>
+  <text x="348" y="324" font-size="13" font-weight="700">#1 of 3</text>
+  <text x="20" y="362" font-size="11" fill="var(--m-ink-soft, #4a4a4a)">ranking_key = (no_travel, severe, high, avg_risk, duration)</text>
+</svg>

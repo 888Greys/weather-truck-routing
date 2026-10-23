@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-labelledby="fig-pipeline-title fig-pipeline-desc" font-family="JetBrains Mono, ui-monospace, monospace" fill="var(--m-ink, #1a1a1a)">
+  <title id="fig-pipeline-title">the plan pipeline</title>
+  <desc id="fig-pipeline-desc">Six stages inside PlanView.post: validate, route with OsrmRouter.plan, sample with sample_along_route, fetch with OpenMeteoWeather.fetch_many, classify with risk.assess, order with ranking_key.</desc>
+  <defs><marker id="fig-pipeline-head-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="M0 1 L10 5 L0 9 z" fill="var(--m-ink, #1a1a1a)"/></marker></defs>
+  <text x="20" y="28" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">BACKEND · ROUTING/SERVICES</text>
+  <circle cx="26" cy="71" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="75" font-size="11" text-anchor="middle">1</text>
+  <rect x="44" y="48" width="300" height="46" fill="var(--m-blue-fill, #e6edf6)" stroke="var(--m-blue-ink, #2f5d9a)"/>
+  <text x="194" y="75.5" font-size="12.5" text-anchor="middle" font-weight="700">PlanView.post()</text>
+  <text x="366" y="75" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">validates the body, builds PlanInput</text>
+  <line x1="194" y1="94" x2="194" y2="120" stroke="var(--m-ink, #1a1a1a)" stroke-width="1.2" marker-end="url(#fig-pipeline-head-ink)"/>
+  <circle cx="26" cy="143" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="147" font-size="11" text-anchor="middle">2</text>
+  <rect x="44" y="120" width="300" height="46" fill="var(--m-violet-fill, #ebe8f5)" stroke="var(--m-violet-ink, #5b4fa3)"/>
+  <text x="194" y="147.5" font-size="12.5" text-anchor="middle" font-weight="700">OsrmRouter.plan()</text>
+  <text x="366" y="147" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">alternatives first, then via-point detours</text>
+  <line x1="194" y1="166" x2="194" y2="192" stroke="var(--m-ink, #1a1a1a)" stroke-width="1.2" marker-end="url(#fig-pipeline-head-ink)"/>
+  <circle cx="26" cy="215" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="219" font-size="11" text-anchor="middle">3</text>
+  <rect x="44" y="192" width="300" height="46" fill="var(--m-violet-fill, #ebe8f5)" stroke="var(--m-violet-ink, #5b4fa3)"/>
+  <text x="194" y="219.5" font-size="12.5" text-anchor="middle" font-weight="700">sample_along_route()</text>
+  <text x="366" y="219" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">carries cumulative miles per point</text>
+  <line x1="194" y1="238" x2="194" y2="264" stroke="var(--m-ink, #1a1a1a)" stroke-width="1.2" marker-end="url(#fig-pipeline-head-ink)"/>
+  <circle cx="26" cy="287" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="291" font-size="11" text-anchor="middle">4</text>
+  <rect x="44" y="264" width="300" height="46" fill="var(--m-violet-fill, #ebe8f5)" stroke="var(--m-violet-ink, #5b4fa3)"/>
+  <text x="194" y="291.5" font-size="12.5" text-anchor="middle" font-weight="700">OpenMeteoWeather.fetch_many()</text>
+  <text x="366" y="291" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">one request per 20 coordinates</text>
+  <line x1="194" y1="310" x2="194" y2="336" stroke="var(--m-ink, #1a1a1a)" stroke-width="1.2" marker-end="url(#fig-pipeline-head-ink)"/>
+  <circle cx="26" cy="359" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="363" font-size="11" text-anchor="middle">5</text>
+  <rect x="44" y="336" width="300" height="46" fill="var(--m-green-fill, #e5f0e4)" stroke="var(--m-green-ink, #336b40)"/>
+  <text x="194" y="363.5" font-size="12.5" text-anchor="middle" font-weight="700">risk.assess()</text>
+  <text x="366" y="363" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">worst of three, then the load gate</text>
+  <line x1="194" y1="382" x2="194" y2="408" stroke="var(--m-ink, #1a1a1a)" stroke-width="1.2" marker-end="url(#fig-pipeline-head-ink)"/>
+  <circle cx="26" cy="431" r="9" fill="var(--m-paper, #fafaf5)" stroke="var(--m-ink, #1a1a1a)" stroke-width="1"/>
+  <text x="26" y="435" font-size="11" text-anchor="middle">6</text>
+  <rect x="44" y="408" width="300" height="46" fill="var(--m-green-fill, #e5f0e4)" stroke="var(--m-green-ink, #336b40)"/>
+  <text x="194" y="435.5" font-size="12.5" text-anchor="middle" font-weight="700">ranking_key()</text>
+  <text x="366" y="435" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">lexicographic: risk before time</text>
+  <text x="44" y="492" font-size="11" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-mute, #6f6f6a)">one HTTP round trip: the browser never calls a provider directly.</text>
+</svg>
