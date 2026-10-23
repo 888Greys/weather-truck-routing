@@ -109,8 +109,13 @@ def sample_along_route(
 
     count = int(total // spacing_miles)
     distances = [i * spacing_miles for i in range(count + 1)]
-    if total - distances[-1] > 1e-6:
+    # A route that is 299.98 mi long would otherwise produce a checkpoint at 299.0
+    # *and* one at 299.98; both round to 300.0 in the payload and appear twice on
+    # the map. Compare with the rounding tolerance instead of 1e-6.
+    if total - distances[-1] > 0.05:
         distances.append(total)
+    else:
+        distances[-1] = total
     # Guard against pathological input (a 40 000 mile route at 1 mile spacing).
     if len(distances) > max_samples:
         step = len(distances) / max_samples

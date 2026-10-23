@@ -251,7 +251,7 @@ def build_plan(payload: PlanInput) -> dict:
                 "label": candidate.label or f"Route {rank_index + 1}",
                 "is_recommended": rank_index == 0,
                 "source": candidate.source,
-                "distance_miles": round(candidate.distance_miles, 1),
+                "distance_miles": round(cells_by_candidate[id(candidate)][1], 1),
                 "delta_vs_fastest_miles": round(candidate.delta_vs_fastest_miles, 1),
                 "duration_hours": round(candidate.duration_hours, 2),
                 "geometry": [p.as_list() for p in geo.simplify(candidate.points, 900)],

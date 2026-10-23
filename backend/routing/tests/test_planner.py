@@ -93,6 +93,13 @@ def test_segment_miles_sum_to_route_distance(plan):
     assert total == pytest.approx(route["distance_miles"], abs=0.5)
 
 
+def test_no_duplicate_checkpoint_mileage(plan):
+    """A route just over a multiple of the spacing must not repeat its last stop."""
+    for route in plan["routes"]:
+        miles = [c["miles"] for c in route["checkpoints"]]
+        assert len(miles) == len(set(miles)), "duplicate checkpoints in " + route["id"]
+
+
 def test_risk_miles_add_up_to_the_route(plan):
     for route in plan["routes"]:
         metrics = route["metrics"]

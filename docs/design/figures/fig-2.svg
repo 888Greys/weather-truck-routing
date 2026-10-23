@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 348" role="img" aria-labelledby="fig-eta-title fig-eta-desc" font-family="JetBrains Mono, ui-monospace, monospace" fill="var(--m-ink, #1a1a1a)">
   <title id="fig-eta-title">from miles to a forecast hour</title>
-  <desc id="fig-eta-desc">A 299 mile route with checkpoints every 25 miles, mapped onto a clock that starts at 14:00 and ends at 20:08, then read out as the forecast hour each checkpoint samples.</desc>
-  <text x="20" y="26" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">ROUTE · 299 MI, CHECKPOINT EVERY 25 MI</text>
+  <desc id="fig-eta-desc">A 300 mile route with checkpoints every 25 miles, mapped onto a clock from 14:00 to 20:08, then read out as the forecast hour each checkpoint samples: 16:00, 17:00, 19:00 and 20:00.</desc>
+  <text x="20" y="26" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">ROUTE · 300 MI, CHECKPOINT EVERY 25 MI</text>
   <rect x="60" y="36" width="540" height="12" fill="var(--m-violet-fill, #ebe8f5)" stroke="var(--m-violet-ink, #5b4fa3)"/>
   <line x1="60" y1="48" x2="60" y2="56" stroke="var(--m-violet-ink, #5b4fa3)" stroke-width="1.2"/>
   <line x1="105" y1="48" x2="105" y2="56" stroke="var(--m-violet-ink, #5b4fa3)" stroke-width="1.2"/>
@@ -20,7 +20,7 @@
   <text x="195" y="72" font-size="11" text-anchor="middle" fill="var(--m-ink-mute, #6f6f6a)">75</text>
   <text x="330" y="72" font-size="11" text-anchor="middle" fill="var(--m-ink-mute, #6f6f6a)">150</text>
   <text x="465" y="72" font-size="11" text-anchor="middle" fill="var(--m-ink-mute, #6f6f6a)">225</text>
-  <text x="600" y="72" font-size="11" text-anchor="middle" fill="var(--m-ink-mute, #6f6f6a)">299</text>
+  <text x="600" y="72" font-size="11" text-anchor="middle" fill="var(--m-ink-mute, #6f6f6a)">300</text>
   <text x="20" y="100" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">CLOCK · THE SAME AXIS, RELABELLED IN HOURS</text>
   <rect x="60" y="110" width="540" height="12" fill="var(--m-amber-fill, #f5ecd9)" stroke="var(--m-amber-ink, #85590c)"/>
   <text x="60" y="140" font-size="12">14:00</text>
@@ -30,37 +30,37 @@
   <line x1="20" y1="180" x2="620" y2="180" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
   <text x="20" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">MILE</text>
   <text x="110" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">ETA</text>
-  <text x="250" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">HOUR</text>
+  <text x="250" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">READS</text>
   <text x="330" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">WIND</text>
   <text x="430" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">RAIN</text>
   <text x="530" y="196" font-size="11" letter-spacing="1.2" fill="var(--m-ink-mute, #6f6f6a)">LEVEL</text>
   <line x1="20" y1="204" x2="620" y2="204" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
   <text x="20" y="224" font-size="12">75</text>
-  <text x="110" y="224" font-size="12">15:27</text>
-  <text x="250" y="224" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">+1</text>
-  <text x="330" y="224" font-size="12">9.0 mph</text>
+  <text x="110" y="224" font-size="12">15:32</text>
+  <text x="250" y="224" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">16:00</text>
+  <text x="330" y="224" font-size="12">26.7 mph</text>
   <text x="430" y="224" font-size="12">0.00 in/hr</text>
-  <text x="530" y="224" font-size="12" fill="var(--m-green-ink, #336b40)">Low</text>
+  <text x="530" y="224" font-size="12" fill="var(--m-olive-ink, #515f26)">Moderate</text>
   <line x1="20" y1="233" x2="620" y2="233" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
   <text x="20" y="250" font-size="12">150</text>
   <text x="110" y="250" font-size="12">17:04</text>
-  <text x="250" y="250" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">+3</text>
-  <text x="330" y="250" font-size="12">31.4 mph</text>
+  <text x="250" y="250" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">17:00</text>
+  <text x="330" y="250" font-size="12">15.9 mph</text>
   <text x="430" y="250" font-size="12">0.00 in/hr</text>
-  <text x="530" y="250" font-size="12" fill="var(--m-olive-ink, #515f26)">Moderate</text>
+  <text x="530" y="250" font-size="12" fill="var(--m-green-ink, #336b40)">Low</text>
   <line x1="20" y1="259" x2="620" y2="259" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
   <text x="20" y="276" font-size="12">225</text>
-  <text x="110" y="276" font-size="12">18:41</text>
-  <text x="250" y="276" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">+4</text>
-  <text x="330" y="276" font-size="12">47.2 mph</text>
-  <text x="430" y="276" font-size="12">0.01 in/hr</text>
-  <text x="530" y="276" font-size="12" fill="var(--m-rose-ink, #b0344d)">No Travel</text>
+  <text x="110" y="276" font-size="12">18:36</text>
+  <text x="250" y="276" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">19:00</text>
+  <text x="330" y="276" font-size="12">20.4 mph</text>
+  <text x="430" y="276" font-size="12">0.78 in/hr</text>
+  <text x="530" y="276" font-size="12" fill="var(--m-rose-ink, #b0344d)">Severe</text>
   <line x1="20" y1="285" x2="620" y2="285" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
-  <text x="20" y="302" font-size="12">299</text>
+  <text x="20" y="302" font-size="12">300</text>
   <text x="110" y="302" font-size="12">20:08</text>
-  <text x="250" y="302" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">+6</text>
-  <text x="330" y="302" font-size="12">14.6 mph</text>
-  <text x="430" y="302" font-size="12">0.02 in/hr</text>
+  <text x="250" y="302" font-size="12" fill="var(--m-ink-soft, #4a4a4a)">20:00</text>
+  <text x="330" y="302" font-size="12">18.5 mph</text>
+  <text x="430" y="302" font-size="12">0.00 in/hr</text>
   <text x="530" y="302" font-size="12" fill="var(--m-green-ink, #336b40)">Low</text>
   <line x1="20" y1="316" x2="620" y2="316" stroke="var(--m-panel-edge, #e4e1d4)" stroke-width="1"/>
   <text x="20" y="336" font-size="11.5" class="m-serif" font-family="Source Serif 4, Georgia, serif" fill="var(--m-ink-soft, #4a4a4a)">eta = departure + duration × (miles / total miles)</text>

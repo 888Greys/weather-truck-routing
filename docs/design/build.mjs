@@ -49,17 +49,17 @@ const eta = figure(
   {
     height: 348,
     title: "from miles to a forecast hour",
-    desc: "A 299 mile route with checkpoints every 25 miles, mapped onto a clock that starts at 14:00 and ends at 20:08, then read out as the forecast hour each checkpoint samples.",
+    desc: "A 300 mile route with checkpoints every 25 miles, mapped onto a clock from 14:00 to 20:08, then read out as the forecast hour each checkpoint samples: 16:00, 17:00, 19:00 and 20:00.",
   },
   (f) => {
-    f.kicker(20, 26, "route · 299 mi, checkpoint every 25 mi");
+    f.kicker(20, 26, "route · 300 mi, checkpoint every 25 mi");
     f.rect({ x: 60, y: 36, w: 540, h: 12, hue: "violet" });
     for (let i = 0; i <= 12; i += 1) {
       const x = 60 + i * 45;
       f.rule(x, 48, x, 56, { hue: "violet", w: 1.2 });
     }
     [0, 3, 6, 9, 12].forEach((i) => {
-      const label = i === 12 ? "299" : String(i * 25);
+      const label = String(i * 25);
       f.text(60 + i * 45, 72, label, { size: 11, anchor: "middle", hue: "ink-mute" });
     });
 
@@ -72,15 +72,15 @@ const eta = figure(
     f.kicker(20, 172, "what each checkpoint reads");
     f.rule(20, 180, 620, 180);
     const cols = [20, 110, 250, 330, 430, 530];
-    ["mile", "eta", "hour", "wind", "rain", "level"].forEach((h, i) => {
+    ["mile", "eta", "reads", "wind", "rain", "level"].forEach((h, i) => {
       f.kicker(cols[i], 196, h);
     });
     f.rule(20, 204, 620, 204);
     const rows = [
-      ["75", "15:27", "+1", "9.0 mph", "0.00 in/hr", "Low", "green"],
-      ["150", "17:04", "+3", "31.4 mph", "0.00 in/hr", "Moderate", "olive"],
-      ["225", "18:41", "+4", "47.2 mph", "0.01 in/hr", "No Travel", "rose"],
-      ["299", "20:08", "+6", "14.6 mph", "0.02 in/hr", "Low", "green"],
+      ["75", "15:32", "16:00", "26.7 mph", "0.00 in/hr", "Moderate", "olive"],
+      ["150", "17:04", "17:00", "15.9 mph", "0.00 in/hr", "Low", "green"],
+      ["225", "18:36", "19:00", "20.4 mph", "0.78 in/hr", "Severe", "rose"],
+      ["300", "20:08", "20:00", "18.5 mph", "0.00 in/hr", "Low", "green"],
     ];
     rows.forEach(([mile, time, hour, wind, rain, level, hue], i) => {
       const y = 224 + i * 26;
