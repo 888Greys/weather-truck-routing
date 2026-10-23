@@ -1,0 +1,21 @@
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.vendor/
+db.sqlite3
+.pytest_cache/
+
+# node
+node_modules/
+dist/
+.npm-cache/
+
+# local scratch
+.tmp/
+.qa/
+*.log
+
+# env
+.env
+.env.local
